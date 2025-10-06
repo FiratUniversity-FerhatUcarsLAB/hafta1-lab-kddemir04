@@ -1,4 +1,34 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:240541007
+AD-SOYAD:Abdulkadir Demir
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+START
+INPUT n  // sınav sayısı
+FOR i = 1 TO n DO
+    INPUT sinavAdi, tarih, konuSayisi
+    FOR j = 1 TO konuSayisi DO
+        INPUT konu[j]
+    END FOR
+END FOR
+
+INPUT gunlukSaat
+bugun = TODAY()
+
+FOR i = 1 TO n DO
+    kalanGun = tarih[i] - bugun
+    IF kalanGun <= 0 THEN
+        PRINT "Zaman kalmadı:", sinavAdi[i]
+    ELSE
+        gunlukKonu = konuSayisi[i] / kalanGun
+        IF gunlukKonu < 1 THEN
+            gunlukKonu = 1
+        END IF
+        PRINT "📅", sinavAdi[i], "planı:"
+        FOR g = 1 TO kalanGun DO
+            PRINT "Gün", g, ":",
+            PRINT gunlukKonu, "konu çalış,", gunlukSaat, "saat"
+        END FOR
+    END IF
+END FOR
+END
+
