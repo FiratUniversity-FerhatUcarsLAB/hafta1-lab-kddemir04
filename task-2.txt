@@ -1,4 +1,89 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:240541007
+AD-SOYAD:Abdulkadir Demir
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+ALGORITHM EnIyiHamleSec
+
+    INPUT: oyuncuDurumu, tahtaDurumu, rakipler
+    OUTPUT: enIyiHamle
+
+    // 1. Başlangıç durumunu değerlendir
+    toplamPara ← oyuncuDurumu.para
+    konum ← oyuncuDurumu.konum
+    sahipOlunanMulkler ← oyuncuDurumu.mulkler
+    mevcutKare ← tahtaDurumu[konum]
+    
+    // 2. Eğer oyuncu hapisteyse
+    IF oyuncuDurumu.durum == "hapiste" THEN
+        IF toplamPara >= 50 THEN
+            enIyiHamle ← "Para öde ve çık"
+        ELSE
+            enIyiHamle ← "Zar at ve çıkmayı dene"
+        ENDIF
+        RETURN enIyiHamle
+    ENDIF
+
+    // 3. Bulunduğu kareye göre karar ver
+    IF mevcutKare.turu == "satınAlınabilir" THEN
+        fiyat ← mevcutKare.fiyat
+        IF toplamPara > fiyat * 1.5 THEN
+            enIyiHamle ← "Satın al"
+        ELSE
+            enIyiHamle ← "Satın alma"
+        ENDIF
+
+    ELSE IF mevcutKare.turu == "rakipMülkü" THEN
+        kira ← mevcutKare.kira
+        IF toplamPara - kira < 0 THEN
+            enIyiHamle ← "Takas teklif et veya ipotek yap"
+        ELSE
+            enIyiHamle ← "Kira öde"
+        ENDIF
+
+    ELSE IF mevcutKare.turu == "şansKartı" THEN
+        enIyiHamle ← "Kart çek ve sonucu değerlendir"
+
+    ELSE IF mevcutKare.turu == "gelirVergisi" THEN
+        IF toplamPara > 200 THEN
+            enIyiHamle ← "200$ öde"
+        ELSE
+            enIyiHamle ← "Toplam servetinin %10’unu öde"
+        ENDIF
+
+    ELSE
+        enIyiHamle ← "Pas geç"
+    ENDIF
+
+
+    // 4. Mülk geliştirme (ev/hotel) kontrolü
+    FOR herMülk IN sahipOlunanMulkler DO
+        IF herMülk.renkGrubuTamamlandi == TRUE THEN
+            IF toplamPara > herMülk.evFiyati * 2 THEN
+                enIyiHamle ← "Ev inşa et: " + herMülk.isim
+            ENDIF
+        ENDIF
+    ENDFOR
+
+
+    // 5. Rakiplerin durumuna göre stratejik hamle
+    FOR rakip IN rakipler DO
+        IF rakip.para < 100 THEN
+            enIyiHamle ← "Takas veya satın alma teklifi yap: " + rakip.isim
+        ENDIF
+    ENDFOR
+
+
+    // 6. Risk analizi
+    riskliKareler ← ["LüksVergi", "RakipOtel", "HapishaneYanı"]
+    sonrakiKare ← tahtaDurumu[(konum + zarTahmini) % tahtaUzunlugu]
+
+    IF sonrakiKare.turu IN riskliKareler THEN
+        enIyiHamle ← "Para biriktir ve temkinli ol"
+    ENDIF
+
+
+    // 7. Son karar
+    RETURN enIyiHamle
+
+END ALGORITHM
+
