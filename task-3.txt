@@ -1,4 +1,36 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:240541007
+AD-SOYAD:Abdulkadir Demir
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+1) Başla
+2) Müzik listesi oluştur veya mevcut koleksiyonu oku
+3) Kullanıcıya sor: "Hangi kritere göre düzenlemek istersiniz?"
+   Yazdır: 
+     1. Türüne göre
+     2. Sanatçıya göre
+     3. Yıla göre
+4) Kullanıcıdan seçim al → secim
+
+5) Eğer secim = 1 ise
+       Müzik listesini TÜR bilgisine göre sırala
+   Değilse eğer secim = 2 ise
+       Müzik listesini SANATÇI adına göre sırala
+   Değilse eğer secim = 3 ise
+       Müzik listesini YILA göre sırala
+   Aksi halde
+       Yazdır "Geçersiz seçim yaptınız."
+       Git adım 3’e
+
+6) Sıralanmış listeyi yazdır
+
+7) Kullanıcıya sor: "Yeni bir şarkı eklemek ister misiniz? (E/H)"
+8) Cevap = kullanıcıdan al
+
+9) Eğer Cevap = "E" ise
+       Yeni şarkının bilgilerini (ad, sanatçı, tür, yıl) iste
+       Bu bilgileri müzik listesine ekle
+       Git adım 3’e (yani tekrar düzenleme yapılabilir)
+   Değilse
+       Yazdır "Koleksiyon düzenleme tamamlandı."
+
+10) Bitir
