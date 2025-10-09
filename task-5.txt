@@ -1,4 +1,78 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:240541007
+AD-SOYAD:Abdulkadir Demir
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+ALGORİTMA: Baba_Iknasi
+GİRİŞ:
+    İstekMiktarı           // Ne kadar para isteniyor?
+    Gerekçe                // Paranın kullanılacağı mantıklı neden
+    BabaModu               // Babanın o anki ruh hali (mutlu, yorgun, sinirli, meşgul)
+    ÖncekiPerformans       // Daha önce borçlar zamanında ödenmiş mi? (Evet/Hayır)
+    Zaman                  // Günün saati (örneğin: sabah, akşam)
+ÇIKIŞ:
+    BaşarılıIkna (EVET / HAYIR)
+
+BAŞLA
+    // 1. Durum Analizi
+    EĞER BabaModu = "sinirli" VEYA BabaModu = "yorgun" İSE
+        YAZ "Şu an uygun zaman değil."
+        BEKLE (BabaModu = "rahat" veya "mutlu" olana kadar)
+    SON
+
+    // 2. Zaman Uygunluğu Kontrolü
+    EĞER Zaman = "akşam yemeği sonrası" VEYA Zaman = "hafta sonu" İSE
+        UygunZaman ← EVET
+    DEĞİLSE
+        YAZ "Şu anda meşgul olabilir, bekle."
+        BEKLE (UygunZaman = EVET olana kadar)
+    SON
+
+    // 3. Hazırlık
+    HazırlıkSeviyesi ← 0
+    EĞER Gerekçe mantıklıysa
+        HazırlıkSeviyesi ← HazırlıkSeviyesi + 1
+    SON
+    EĞER ÖncekiPerformans = "Evet" İSE
+        HazırlıkSeviyesi ← HazırlıkSeviyesi + 1
+    SON
+
+    // 4. Başlangıç Etkileşimi
+    YAZ "Baba nasılsın?"      // samimi giriş
+    GÜLÜMSE
+    EĞER BabaModu = "mutlu" İSE
+        DavranışTonu ← "rahat ve pozitif"
+    DEĞİLSE
+        DavranışTonu ← "nazik ve dikkatli"
+    SON
+
+    // 5. İstek Sunumu
+    YAZ "Baba, küçük bir şey isteyecektim."
+    YAZ "Şu anda ", Gerekçe, " için biraz desteğine ihtiyacım var."
+    YAZ "Yaklaşık ", İstekMiktarı, " lira gerekiyor."
+
+    // 6. İkna Stratejisi
+    EĞER HazırlıkSeviyesi = 2 İSE
+        Strateji ← "mantık + güven"
+        YAZ "Biliyorsun, önceki paramı zamanında iade etmiştim."
+        YAZ "Bu da önemli bir şey için, emin ol dikkatli olacağım."
+    EĞER HazırlıkSeviyesi = 1 İSE
+        Strateji ← "duygusal yaklaşım"
+        YAZ "Bu konuda gerçekten yardıma ihtiyacım var baba."
+    DEĞİLSE
+        Strateji ← "düşük güven yaklaşımı"
+        YAZ "Bu sefer daha dikkatli olacağım, söz veriyorum."
+    SON
+
+    // 7. Karar Bekleme
+    Cevap ← BabaCevabi()       // “Evet” veya “Hayır” olarak gelir
+
+    // 8. Sonuç Değerlendirmesi
+    EĞER Cevap = "Evet" İSE
+        YAZ "Teşekkür ederim baba, çok yardımcı oldun!"
+        BaşarılıIkna ← EVET
+    DEĞİLSE
+        YAZ "Tamam baba, anlıyorum. Belki sonra tekrar konuşuruz."
+        BaşarılıIkna ← HAYIR
+    SON
+
+BİTİR
