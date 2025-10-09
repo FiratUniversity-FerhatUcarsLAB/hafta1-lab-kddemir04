@@ -1,4 +1,46 @@
-Öğrenci No:
-AD-SOYAD:
+Öğrenci No:240541007
+AD-SOYAD:Abdulkadir Demir
 
 Lütfen seçtiğiniz algoritmaya ait çözümü ve diğer isterleri aşağıya ekleyiniz:
+ALGORİTMA: Otobüs_Rotası_Optimizasyonu
+GİRİŞ:
+    Duraklar[]        // tüm durakların listesi
+    Mesafe[Durak_i][Durak_j]  // iki durak arasındaki mesafe tablosu
+    BaşlangıçDurak    // otobüsün başladığı durak
+
+ÇIKIŞ:
+    EnİyiRota[], ToplamMesafe
+
+BAŞLA
+    ZiyaretEdilenDuraklar ← boş liste
+    MevcutDurak ← BaşlangıçDurak
+    ToplamMesafe ← 0
+    Ekle(ZiyaretEdilenDuraklar, MevcutDurak)
+
+    TEKRARLA (Duraklar listesinde ziyaret edilmemiş durak kaldığı sürece)
+        EnYakınDurak ← BOŞ
+        EnKısaMesafe ← ∞
+
+        HER durak İÇİN Durak IN Duraklar
+            EĞER Durak ZiyaretEdilenDuraklar LİSTESİNDE DEĞİLSE
+                MesafeDegeri ← Mesafe[MevcutDurak][Durak]
+                EĞER MesafeDegeri < EnKısaMesafe İSE
+                    EnKısaMesafe ← MesafeDegeri
+                    EnYakınDurak ← Durak
+                SON
+            SON
+        SON
+
+        Ekle(ZiyaretEdilenDuraklar, EnYakınDurak)
+        ToplamMesafe ← ToplamMesafe + EnKısaMesafe
+        MevcutDurak ← EnYakınDurak
+    SON TEKRARLA
+
+    // Son olarak otobüs başlangıç noktasına dönsün
+    DönüşMesafesi ← Mesafe[MevcutDurak][BaşlangıçDurak]
+    ToplamMesafe ← ToplamMesafe + DönüşMesafesi
+    Ekle(ZiyaretEdilenDuraklar, BaşlangıçDurak)
+
+    YAZ "En İyi Rota: ", ZiyaretEdilenDuraklar
+    YAZ "Toplam Mesafe: ", ToplamMesafe
+BİTİR
